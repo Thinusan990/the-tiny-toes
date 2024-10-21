@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_tiny_toes/navbar.dart';
 import 'package:the_tiny_toes/server/network_service.dart';
 
 class GalleryScreen extends StatefulWidget {
@@ -52,9 +53,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Gallery'),
-      ),
+      appBar: Navbar(title: 'Gallery'),
       body: _loading
           ? Center(child: CircularProgressIndicator())
           : GridView.builder(

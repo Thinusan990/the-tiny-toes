@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_tiny_toes/navbar.dart';
 
 class ViewPhotoScreen extends StatelessWidget {
   final Map<String, dynamic> photo;
@@ -8,9 +9,7 @@ class ViewPhotoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(photo['title']),
-      ),
+      appBar: Navbar(title: 'Gallery'),
       body: Center(
         child: Column(
           children: [

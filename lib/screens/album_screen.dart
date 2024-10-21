@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_tiny_toes/navbar.dart';
 import 'package:the_tiny_toes/server/network_service.dart';
 
 class AlbumScreen extends StatefulWidget {
@@ -44,7 +45,8 @@ class _AlbumScreenState extends State<AlbumScreen> {
         title: Text('Error'),
         content: Text(message),
         actions: [
-          TextButton(onPressed: () => Navigator.of(ctx).pop(), child: Text('OK')),
+          TextButton(
+              onPressed: () => Navigator.of(ctx).pop(), child: Text('OK')),
         ],
       ),
     );
@@ -53,26 +55,24 @@ class _AlbumScreenState extends State<AlbumScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Albums'),
-      ),
+      appBar: Navbar(title: 'Albums'),
       body: _loading
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(
-        itemCount: _albums.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(_albums[index]['title']),
-            onTap: () {
-              Navigator.pushNamed(
-                context,
-                '/gallery',
-                arguments: _albums[index]['id'],
-              );
-            },
-          );
-        },
-      ),
+              itemCount: _albums.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(_albums[index]['title']),
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/gallery',
+                      arguments: _albums[index]['id'],
+                    );
+                  },
+                );
+              },
+            ),
     );
   }
 }

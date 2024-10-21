@@ -33,7 +33,7 @@ class _UsersScreenState extends State<UsersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Navbar(title: 'Users'),
+      appBar: Navbar(title: 'Users', showBackButton: false),
       body: _loading
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(

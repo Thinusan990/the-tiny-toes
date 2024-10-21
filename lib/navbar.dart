@@ -4,8 +4,9 @@ import 'package:the_tiny_toes/providers/auth_provider.dart';
 
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final bool showBackButton;
 
-  Navbar({required this.title});
+  Navbar({required this.title, this.showBackButton = false});
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
@@ -13,53 +14,89 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     var authProvider = Provider.of<AuthProvider>(context);
+
     return AppBar(
-      leading: Padding(
-        padding: const EdgeInsets.all(1.0),
-        child: SizedBox(
-          height: 30,
-          child: ElevatedButton(
-            onPressed: () {
-              authProvider.logout();
-              Navigator.pushReplacementNamed(context, '/login');
-            },
-            child: Text('Logout', style: TextStyle(color: Colors.white)),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red,
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+      elevation: 0,
+      centerTitle: false, // Center title is false to control layout
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // Distribute space evenly
+        children: [
+          // Back button
+          if (showBackButton) // Only show back button if it's true
+            IconButton(
+              icon: Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () {
+                Navigator.pop(context); // Navigate to the previous page
+              },
             ),
-          ),
-        ),
-      ),
-      centerTitle: true,
-      title: Text(title, style: TextStyle(fontSize: 20)),
-      actions: [
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
+          // Title
+
+          // Logout button
+          SizedBox(
+            height: 40,
+            child: OutlinedButton(
+              onPressed: () {
+                authProvider.logout();
+                Navigator.pushReplacementNamed(context, '/login');
+              },
               child: Text(
-                authProvider.username ?? 'Guest',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            // Circular avatar
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: CircleAvatar(
-                backgroundColor: Colors.grey.shade800,
-                child: Text(
-                  (authProvider.username != null &&
-                          authProvider.username!.isNotEmpty)
-                      ? authProvider.username![0].toUpperCase()
-                      : 'G',
-                  style: TextStyle(color: Colors.white),
+                'LOGOUT',
+                style: TextStyle(
+                  color: Colors.red, // Red text color for visibility
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold, // Bold text
                 ),
               ),
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: Colors.red, width: 2.0),
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                backgroundColor: Colors.white,
+                minimumSize: Size(80, 40), // Ensure button size fits text
+              ),
             ),
-          ],
+          ),
+          Expanded(
+            child: Text(
+              title,
+              textAlign: TextAlign.center, // Center the title
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+          // User name and avatar
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: Row(
+              children: [
+                Text(
+                  authProvider.username ?? 'Guest',
+                  style: TextStyle(color: Colors.black),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.blue,
+                    child: Icon(
+                      Icons.person_4_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(4.0),
+        child: Container(
+          color: Colors.grey,
+          height: 2.0,
         ),
-      ],
+      ),
     );
   }
 }
