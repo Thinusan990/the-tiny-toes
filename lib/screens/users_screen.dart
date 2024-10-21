@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_tiny_toes/navbar.dart';
 import 'package:the_tiny_toes/server/network_service.dart';
 
 class UsersScreen extends StatefulWidget {
@@ -32,23 +33,21 @@ class _UsersScreenState extends State<UsersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Users'),
-      ),
+      appBar: Navbar(title: 'Users'),
       body: _loading
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(
-        itemCount: _users.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(_users[index]['name']),
-            subtitle: Text(_users[index]['email']),
-            onTap: () {
-              Navigator.pushNamed(context, '/albums', arguments: _users[index]['id']);
-            },
-          );
-        },
-      ),
+              itemCount: _users.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(_users[index]['name']),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/albums',
+                        arguments: _users[index]['id']);
+                  },
+                );
+              },
+            ),
     );
   }
 }
