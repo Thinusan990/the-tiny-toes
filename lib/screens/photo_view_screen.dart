@@ -25,7 +25,6 @@ class _ViewPhotoScreenState extends State<ViewPhotoScreen> {
 
   void _fetchAlbumAndArtist() async {
     try {
-      // Fetch the album data
       var albums = await _networkService.fetchAlbums(widget.photo['albumId']);
       var album = albums.firstWhere(
           (album) => album['id'] == widget.photo['albumId'],
@@ -36,7 +35,6 @@ class _ViewPhotoScreenState extends State<ViewPhotoScreen> {
           _albumTitle = album['title'] ?? 'Unknown Album';
         });
 
-        // Fetch the artist (user) data based on the album's userId
         var users = await _networkService.fetchUsers();
         var artist = users.firstWhere((user) => user['id'] == album['userId'],
             orElse: () => null);

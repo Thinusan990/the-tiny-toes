@@ -17,17 +17,15 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
 
     return AppBar(
       elevation: 0,
-      centerTitle: false, // Center title is false to control layout
+      centerTitle: false,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        // Distribute space evenly
         children: [
-          // Back button
-          if (showBackButton) // Only show back button if it's true
+          if (showBackButton)
             IconButton(
               icon: Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () {
-                Navigator.pop(context); // Navigate to the previous page
+                Navigator.pop(context);
               },
             ),
           // Title
@@ -43,7 +41,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
               child: Text(
                 'LOGOUT',
                 style: TextStyle(
-                  color: Colors.red, // Red text color for visibility
+                  color: Colors.red,
                   fontSize: 10,
                   fontWeight: FontWeight.bold, // Bold text
                 ),
@@ -55,18 +53,18 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 backgroundColor: Colors.white,
-                minimumSize: Size(80, 40), // Ensure button size fits text
+                minimumSize: Size(80, 40),
               ),
             ),
           ),
           Expanded(
             child: Text(
               title,
-              textAlign: TextAlign.center, // Center the title
+              textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20),
             ),
           ),
-          // User name and avatar
+
           Padding(
             padding: const EdgeInsets.only(left: 16.0),
             child: Row(

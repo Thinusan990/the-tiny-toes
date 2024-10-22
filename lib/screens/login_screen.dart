@@ -13,7 +13,9 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isLoading = false;
 
   void _login() async {
-    setState(() { _isLoading = true; });
+    setState(() {
+      _isLoading = true;
+    });
     try {
       await Provider.of<AuthProvider>(context, listen: false)
           .login(_usernameController.text, _passwordController.text);
@@ -25,38 +27,79 @@ class _LoginScreenState extends State<LoginScreen> {
           title: Text('Error'),
           content: Text('Invalid username or password'),
           actions: [
-            TextButton(onPressed: () => Navigator.of(ctx).pop(), child: Text('OK'))
+            TextButton(
+                onPressed: () => Navigator.of(ctx).pop(), child: Text('OK'))
           ],
         ),
       );
     }
-    setState(() { _isLoading = false; });
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Spacer(),
+            Text(
+              'The Tiny Toes',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            Spacer(),
+            SizedBox(height: 40),
+
+            // Username Field
             TextField(
               controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Username'),
+              decoration: InputDecoration(
+                labelText: 'Username',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
             ),
+            SizedBox(height: 20), // Space between fields
+
+            // Password Field
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: InputDecoration(
+                labelText: 'Password',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               obscureText: true,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 40),
+
+            // Login Button
             _isLoading
                 ? CircularProgressIndicator()
                 : ElevatedButton(
-              onPressed: _login,
-              child: Text('Login'),
-            ),
+                    onPressed: _login,
+                    style: ElevatedButton.styleFrom(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      backgroundColor: Colors.blue,
+                    ),
+                    child: Text('Login',
+                        style: TextStyle(fontSize: 18, color: Colors.white)),
+                  ),
+            Spacer(),
           ],
         ),
       ),

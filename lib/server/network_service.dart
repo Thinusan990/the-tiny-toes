@@ -3,7 +3,8 @@ import 'package:http/http.dart' as http;
 
 class NetworkService {
   Future<List<dynamic>> fetchUsers() async {
-    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users'));
+    final response =
+        await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users'));
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
@@ -12,7 +13,8 @@ class NetworkService {
   }
 
   Future<List<dynamic>> fetchAlbums(int userId) async {
-    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/albums?userId=$userId'));
+    final response = await http.get(Uri.parse(
+        'https://jsonplaceholder.typicode.com/albums?userId=$userId'));
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
@@ -21,7 +23,8 @@ class NetworkService {
   }
 
   Future<List<dynamic>> fetchPhotos(int albumId) async {
-    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/photos?albumId=$albumId'));
+    final response = await http.get(Uri.parse(
+        'https://jsonplaceholder.typicode.com/photos?albumId=$albumId'));
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {

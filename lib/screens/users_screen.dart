@@ -25,9 +25,7 @@ class _UsersScreenState extends State<UsersScreen> {
         _users = users;
         _loading = false;
       });
-    } catch (e) {
-      // Handle error state
-    }
+    } catch (e) {}
   }
 
   @override
@@ -36,17 +34,38 @@ class _UsersScreenState extends State<UsersScreen> {
       appBar: Navbar(title: 'Users', showBackButton: false),
       body: _loading
           ? Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: _users.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(_users[index]['name']),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/albums',
-                        arguments: _users[index]['id']);
+          : Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: ListView.builder(
+                  itemCount: _users.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        ListTile(
+                          title: Text(_users[index]['name']),
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              '/albums',
+                              arguments: _users[index]['id'],
+                            );
+                          },
+                        ),
+                        if (index != _users.length - 1)
+                          Divider(
+                            color: Colors.grey,
+                            thickness: 1,
+                          ),
+                      ],
+                    );
                   },
-                );
-              },
+                ),
+              ),
             ),
     );
   }
