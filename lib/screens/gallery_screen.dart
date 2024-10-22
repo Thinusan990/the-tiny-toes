@@ -44,7 +44,8 @@ class _GalleryScreenState extends State<GalleryScreen> {
         title: Text('Error'),
         content: Text(message),
         actions: [
-          TextButton(onPressed: () => Navigator.of(ctx).pop(), child: Text('OK')),
+          TextButton(
+              onPressed: () => Navigator.of(ctx).pop(), child: Text('OK')),
         ],
       ),
     );
@@ -57,28 +58,28 @@ class _GalleryScreenState extends State<GalleryScreen> {
       body: _loading
           ? Center(child: CircularProgressIndicator())
           : GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, // Adjust the number of columns as necessary
-          crossAxisSpacing: 10.0,
-          mainAxisSpacing: 10.0,
-        ),
-        itemCount: _photos.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(
-                context,
-                '/viewPhoto',
-                arguments: _photos[index],
-              );
-            },
-            child: Image.network(
-              _photos[index]['thumbnailUrl'],
-              fit: BoxFit.cover,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, // Adjust the number of columns as necessary
+                crossAxisSpacing: 10.0,
+                mainAxisSpacing: 10.0,
+              ),
+              itemCount: _photos.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/viewPhoto',
+                      arguments: _photos[index],
+                    );
+                  },
+                  child: Image.network(
+                    _photos[index]['thumbnailUrl'],
+                    fit: BoxFit.cover,
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 }
