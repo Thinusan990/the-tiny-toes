@@ -4,13 +4,15 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This app is created for a baby gallery album app.
+The version of flutter and the dart are
+Flutter 3.22.0
+Dart 3.4.0 • DevTools 2.34.3 respectively
+Here to run this project clone the project in the github repository and then create a folder in your
+pc in the name of tiny toes and then
+open the terminal of that folder and then rin the command
+"git clone https://github.com/Thinusan990/the-tiny-toes.git".
+Then run the "flutter pub get" in that folder and then you can open that application in IDE.
+For test purposes i have added test log in credientials as
+username=Thinusan
+password=password990
